@@ -1,2 +1,97 @@
+/* App.css */
 
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
 
+/* Ribbon styles */
+.ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0044cc;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Page content styling */
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  color: #333333;
+}
+
+.upload-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.upload-section {
+  flex: 1;
+  border: 1px solid #cccccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555555;
+}
+
+input[type="file"] {
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+}
+
+p {
+  margin-top: 8px;
+  color: #666666;
+  font-size: 14px;
+}
+
+.page-content {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+  color: #555555;
+}

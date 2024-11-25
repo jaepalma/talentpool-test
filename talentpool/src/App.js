@@ -19,6 +19,20 @@ function App() {
   const [cvFile, setCvFile] = useState(null);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [uploadedVideos, setUploadedVideos] = useState({});
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [currentUploadType, setCurrentUploadType] = useState(null); // "cv" or "video"
+  const [pendingUpload, setPendingUpload] = useState(null);
+
+  const handleUploadClick = (type, callback) => {
+    setCurrentUploadType(type);
+    setPendingUpload(() => callback);
+    setShowPrivacyModal(true);
+  };
+
+  const handlePrivacyAgreement = () => {
+    setShowPrivacyModal(false);
+    if (pendingUpload) pendingUpload();
+  };
 
   const handleCvUpload = (event) => {
     const file = event.target.files[0];
@@ -28,24 +42,8 @@ function App() {
     }
   };
 
-  const handleQuestionSelect = (question) => {
-    setSelectedQuestions((prev) =>
-      prev.includes(question)
-        ? prev.filter((q) => q !== question)
-        : [...prev, question]
-    );
-  };
-
   const handleVideoUpload = (question, file) => {
     setUploadedVideos((prev) => ({ ...prev, [question]: file }));
-  };
-
-  const handleSubmit = () => {
-    if (selectedQuestions.length < 5) {
-      alert("Please select at least 5 questions.");
-      return;
-    }
-    alert("Application submitted successfully!");
   };
 
   return (
@@ -69,13 +67,21 @@ function App() {
                   {/* Upload CV Section */}
                   <div className="cv-section">
                     <h2>Upload Curriculum Vitae</h2>
-                    <label htmlFor="cv-upload">
-                      Upload CV (PDF, DOCX):
-                    </label>
+                    <button
+                      className="upload-button"
+                      onClick={() =>
+                        handleUploadClick("cv", () =>
+                          document.getElementById("cv-upload").click()
+                        )
+                      }
+                    >
+                      Upload CV
+                    </button>
                     <input
                       type="file"
                       id="cv-upload"
                       accept=".pdf, .doc, .docx"
+                      style={{ display: "none" }}
                       onChange={handleCvUpload}
                     />
                     {cvFile && <p>Selected file: {cvFile.name}</p>}
@@ -87,26 +93,40 @@ function App() {
                     <p>Select at least 5 questions and upload one video for each.</p>
                     <div className="questions-container">
                       {interviewQuestions.map((question, index) => (
-                        <div
-                          key={index}
-                          className={`question-item ${
-                            selectedQuestions.includes(question) ? "selected" : ""
-                          }`}
-                        >
+                        <div key={index} className="question-item">
                           <label>
                             <input
                               type="checkbox"
                               value={question}
-                              onChange={() => handleQuestionSelect(question)}
-                              checked={selectedQuestions.includes(question)}
+                              onChange={() =>
+                                setSelectedQuestions((prev) =>
+                                  prev.includes(question)
+                                    ? prev.filter((q) => q !== question)
+                                    : [...prev, question]
+                                )
+                              }
                             />
                             {question}
                           </label>
                           {selectedQuestions.includes(question) && (
                             <div className="upload-section">
+                              <button
+                                className="upload-button"
+                                onClick={() =>
+                                  handleUploadClick("video", () =>
+                                    document.getElementById(
+                                      `video-upload-${index}`
+                                    ).click()
+                                  )
+                                }
+                              >
+                                Upload Video
+                              </button>
                               <input
                                 type="file"
+                                id={`video-upload-${index}`}
                                 accept="video/*"
+                                style={{ display: "none" }}
                                 onChange={(e) =>
                                   handleVideoUpload(question, e.target.files[0])
                                 }
@@ -123,13 +143,6 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <button
-                  className="submit-button"
-                  onClick={handleSubmit}
-                  disabled={selectedQuestions.length < 5}
-                >
-                  Submit Application
-                </button>
               </div>
             }
           />
@@ -142,6 +155,25 @@ function App() {
             element={<h2 className="page-content">Contact Us</h2>}
           />
         </Routes>
+
+        {/* Privacy Modal */}
+        {showPrivacyModal && (
+          <div className="modal">
+            <div className="modal-content">
+              <h2>Data Privacy Agreement</h2>
+              <p>
+                By uploading your files, you agree to our data privacy
+                policies, including the safe and secure handling of your data.
+              </p>
+              <div className="modal-buttons">
+                <button onClick={handlePrivacyAgreement}>I Agree</button>
+                <button onClick={() => setShowPrivacyModal(false)}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Router>
   );

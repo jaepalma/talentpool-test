@@ -3,8 +3,22 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
 function App() {
+  const interviewQuestions = [
+    "Tell me about yourself.",
+    "What are your strengths?",
+    "What are your weaknesses?",
+    "Why do you want to work here?",
+    "Describe a challenging situation and how you handled it.",
+    "Where do you see yourself in five years?",
+    "Why should we hire you?",
+    "What motivates you?",
+    "What is your greatest achievement?",
+    "How do you handle pressure?",
+  ];
+
   const [cvFile, setCvFile] = useState(null);
-  const [videoFile, setVideoFile] = useState(null);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
+  const [uploadedVideos, setUploadedVideos] = useState({});
 
   const handleCvUpload = (event) => {
     const file = event.target.files[0];
@@ -14,12 +28,24 @@ function App() {
     }
   };
 
-  const handleVideoUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setVideoFile(file);
-      alert(`Video answer uploaded: ${file.name}`);
+  const handleQuestionSelect = (question) => {
+    setSelectedQuestions((prev) =>
+      prev.includes(question)
+        ? prev.filter((q) => q !== question)
+        : [...prev, question]
+    );
+  };
+
+  const handleVideoUpload = (question, file) => {
+    setUploadedVideos((prev) => ({ ...prev, [question]: file }));
+  };
+
+  const handleSubmit = () => {
+    if (selectedQuestions.length < 5) {
+      alert("Please select at least 5 questions.");
+      return;
     }
+    alert("Application submitted successfully!");
   };
 
   return (
@@ -38,11 +64,13 @@ function App() {
             path="/"
             element={
               <div className="container">
-                <h1>Upload Your Documents</h1>
-                <div className="upload-container">
-                  <div className="upload-section">
+                <h1>Submit Your Application</h1>
+                <div className="form-container">
+                  {/* Upload CV Section */}
+                  <div className="cv-section">
+                    <h2>Upload Curriculum Vitae</h2>
                     <label htmlFor="cv-upload">
-                      Upload Curriculum Vitae (PDF, DOCX):
+                      Upload CV (PDF, DOCX):
                     </label>
                     <input
                       type="file"
@@ -53,19 +81,55 @@ function App() {
                     {cvFile && <p>Selected file: {cvFile.name}</p>}
                   </div>
 
-                  <div className="upload-section">
-                    <label htmlFor="video-upload">
-                      Upload Video Answer (MP4, MOV):
-                    </label>
-                    <input
-                      type="file"
-                      id="video-upload"
-                      accept=".mp4, .mov"
-                      onChange={handleVideoUpload}
-                    />
-                    {videoFile && <p>Selected file: {videoFile.name}</p>}
+                  {/* Video Upload Section */}
+                  <div className="video-section">
+                    <h2>Upload Interview Videos</h2>
+                    <p>Select at least 5 questions and upload one video for each.</p>
+                    <div className="questions-container">
+                      {interviewQuestions.map((question, index) => (
+                        <div
+                          key={index}
+                          className={`question-item ${
+                            selectedQuestions.includes(question) ? "selected" : ""
+                          }`}
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              value={question}
+                              onChange={() => handleQuestionSelect(question)}
+                              checked={selectedQuestions.includes(question)}
+                            />
+                            {question}
+                          </label>
+                          {selectedQuestions.includes(question) && (
+                            <div className="upload-section">
+                              <input
+                                type="file"
+                                accept="video/*"
+                                onChange={(e) =>
+                                  handleVideoUpload(question, e.target.files[0])
+                                }
+                              />
+                              {uploadedVideos[question] && (
+                                <p>
+                                  Uploaded: {uploadedVideos[question].name}
+                                </p>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
+                <button
+                  className="submit-button"
+                  onClick={handleSubmit}
+                  disabled={selectedQuestions.length < 5}
+                >
+                  Submit Application
+                </button>
               </div>
             }
           />

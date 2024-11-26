@@ -4,15 +4,15 @@ import "./App.css";
 
 function App() {
   const interviewQuestions = [
-    "Tell me about yourself.",
+    "Tell us about yourself.",
     "What are your strengths?",
     "What are your weaknesses?",
-    "Why do you want to work here?",
+    "What are your goals?",
     "Describe a challenging situation and how you handled it.",
     "Where do you see yourself in five years?",
-    "Why should we hire you?",
+    "What three words best describe you?",
     "What motivates you?",
-    "What is your greatest achievement?",
+    "What are your proudest achievements?",
     "How do you handle pressure?",
   ];
 
@@ -20,7 +20,7 @@ function App() {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [uploadedVideos, setUploadedVideos] = useState({});
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
-  const [currentUploadType, setCurrentUploadType] = useState(null); // "cv" or "video"
+  const [currentUploadType, setCurrentUploadType] = useState(null);
   const [pendingUpload, setPendingUpload] = useState(null);
 
   const handleUploadClick = (type, callback) => {
@@ -46,11 +46,22 @@ function App() {
     setUploadedVideos((prev) => ({ ...prev, [question]: file }));
   };
 
+  const handleVideoRemove = (question) => {
+    setUploadedVideos((prev) => {
+      const updatedVideos = { ...prev };
+      delete updatedVideos[question];
+      return updatedVideos;
+    });
+  };
+
+  const uploadedCount = Object.keys(uploadedVideos).length;
+  const progressPercentage = Math.min((uploadedCount / 5) * 100, 100);
+
   return (
     <Router>
       <div className="app">
         <header className="ribbon">
-          <div className="logo">MySite</div>
+          <div className="logo">talentpool.ph</div>
           <nav className="nav-links">
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
@@ -62,9 +73,8 @@ function App() {
             path="/"
             element={
               <div className="container">
-                <h1>Submit Your Application</h1>
+                <h1>Get internship opportunities in 15 minutes!</h1>
                 <div className="form-container">
-                  {/* Upload CV Section */}
                   <div className="cv-section">
                     <h2>Upload Curriculum Vitae</h2>
                     <button
@@ -87,10 +97,18 @@ function App() {
                     {cvFile && <p>Selected file: {cvFile.name}</p>}
                   </div>
 
-                  {/* Video Upload Section */}
                   <div className="video-section">
                     <h2>Upload Interview Videos</h2>
                     <p>Select at least 5 questions and upload one video for each.</p>
+                    <div className="progress-bar-container">
+                      <div
+                        className="progress-bar"
+                        style={{ width: `${progressPercentage}%` }}
+                      ></div>
+                      <p className="progress-text">
+                        {uploadedCount}/5 Videos Uploaded
+                      </p>
+                    </div>
                     <div className="questions-container">
                       {interviewQuestions.map((question, index) => (
                         <div key={index} className="question-item">
@@ -131,11 +149,17 @@ function App() {
                                   handleVideoUpload(question, e.target.files[0])
                                 }
                               />
-                              {uploadedVideos[question] && (
-                                <p>
-                                  Uploaded: {uploadedVideos[question].name}
-                                </p>
-                              )}
+                              {uploadedVideos[question] ? (
+                                <div className="uploaded-info">
+                                  <p>{uploadedVideos[question].name}</p>
+                                  <button
+                                    className="remove-button"
+                                    onClick={() => handleVideoRemove(question)}
+                                  >
+                                    Remove
+                                  </button>
+                                </div>
+                              ) : null}
                             </div>
                           )}
                         </div>
@@ -156,7 +180,6 @@ function App() {
           />
         </Routes>
 
-        {/* Privacy Modal */}
         {showPrivacyModal && (
           <div className="modal">
             <div className="modal-content">

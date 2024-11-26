@@ -1,5 +1,4 @@
-/* Ribbon styles remain unchanged */
-
+/* Retained Ribbon and Layout Styles */
 /* Modal Styling */
 .modal {
   position: fixed;
@@ -53,7 +52,40 @@
   background-color: #cccccc;
 }
 
-/* Flexbox layout for the bins */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.ribbon {
+  background-color: #642D9B;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.ribbon .logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  padding: 20px;
+}
+
 .form-container {
   display: flex;
   gap: 20px;
@@ -67,4 +99,60 @@
   border: 1px solid #cccccc;
   border-radius: 8px;
   background-color: #f7f7f7;
+}
+
+.upload-button {
+  background-color: #642D9B;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-button:hover {
+  background-color: #0033aa;
+}
+
+/* Progress Bar Styles */
+.progress-bar-container {
+  margin: 20px 0;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background-color: #ffc709;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.uploaded-info {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-button {
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #aa0000;
 }

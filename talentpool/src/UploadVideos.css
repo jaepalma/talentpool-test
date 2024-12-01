@@ -1,0 +1,83 @@
+.container_ {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .vid {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #642D9B;
+  }
+  
+  p {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .categories-container {
+    margin-top: 20px;
+  }
+  
+  /* Category title styling */
+  .category-title {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Hover effect for categories */
+  .category-title:hover {
+    text-decoration: underline;
+  }
+  
+  /* Arrow styling */
+  /* Hollow triangle arrow styling */
+  .category-title::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 8px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333; /* Color of the triangle */
+    transition: transform 0.3s ease;
+  }
+  
+  /* Rotate triangle when dropdown is open */
+  .category-title.open::after {
+    transform: rotate(180deg);
+  }
+  
+  
+  /* Rotate arrow when dropdown is open */
+  .category-title.open::after {
+    transform: rotate(-180deg);
+  }
+  
+  /* Dropdown questions styling */
+  .questions-dropdown {
+    margin-left: 20px;
+    padding: 10px 0;
+  }
+  
+  /* Question item styling */
+  .question-item {
+    margin-bottom: 12px;
+  }
+  
+  .upload-section {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  input[type="file"] {
+    display: none;
+  }
+  

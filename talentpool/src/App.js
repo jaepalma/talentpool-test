@@ -11,14 +11,35 @@ function App() {
   const [pendingUpload, setPendingUpload] = useState(null); // Store pending upload action
   const navigate = useNavigate();
 
-  const handleCvUpload = (event) => {
+  const handleCvUpload = async (event) => {
     const file = event.target.files[0];
+    console.log("one")
+    console.log(file)
     if (file) {
-      setCvFile(file);
-      alert(`Curriculum Vitae uploaded: ${file.name}`);
+      const formData = new FormData();
+      formData.append('file', file);
+      console.log(formData)
+      try {
+        const response = await fetch('http://localhost:3000/upload', {
+          method: 'POST',
+          body: formData,
+        });
+        console.log("response")
+        console.log(response)
+        const data = await response.json();
+        console.log(data)
+        if (data.success) {
+          alert(`File uploaded successfully! View it here: ${data.webViewLink}`);
+        } else {
+          alert('File upload failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        alert('Error uploading file.');
+      }
     }
   };
-
+  
   const handleRemoveCv = () => {
     setCvFile(null);
   };
@@ -79,7 +100,7 @@ function App() {
                   <input
                     type="file"
                     id="cv-upload"
-                    accept=".pdf, .doc, .docx"
+                    accept=".pdf, .doc,"
                     style={{ display: "none" }}
                     onChange={handleCvUpload}
                   />

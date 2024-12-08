@@ -1,3 +1,8 @@
+.title {
+  color: #642D9B;
+  font-size: 70px;
+}
+
 /* Form container to center the buttons */
 .form-container {
   display: flex;
@@ -16,15 +21,16 @@
 
 /* Styling for the buttons */
 .upload-button {
-  margin: 10px;
+  margin: 20px;
   background-color: #642D9B;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 50px 100px; /* Increased padding for larger size */
   border-radius: 5px;
   cursor: pointer;
-  max-width: 200px; /* Limit the maximum width to ensure they don’t grow too large */
-  text-align: center; /* Centers the button text */
+  max-width: 400px; /* Increased maximum width */
+  font-size: 34px; /* Larger font size */
+  text-align: center;
 }
 
 .upload-button:hover {
@@ -117,11 +123,6 @@ body {
 
 .nav-links a:hover {
   text-decoration: underline;
-}
-
-.title {
-  color: #642D9B;
-  font-size: 50px;
 }
 
 .container {

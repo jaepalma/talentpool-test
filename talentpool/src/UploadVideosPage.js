@@ -52,8 +52,11 @@ function UploadVideosPage({ onVideoUpload }) {
   const [openCategories, setOpenCategories] = useState({});
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [fileToUpload, setFileToUpload] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+
 
   const handleVideoUpload = async (question, file) => {
+    setIsUploading(true);
     setUploadedVideos((prev) => ({ ...prev, [question]: file }));
 
     // Upload video to the backend
@@ -75,11 +78,13 @@ function UploadVideosPage({ onVideoUpload }) {
       console.log("Uploaded video details:", data);
 
       onVideoUpload(question, file);
+      alert("Video uploaded successfully!")
     } catch (error) {
       console.error("Error uploading video:", error);
       alert("Video upload failed. Please try again.");
     } finally {
       setFileToUpload(null);
+      setIsUploading(false);
     }
   };
 
@@ -154,34 +159,30 @@ function UploadVideosPage({ onVideoUpload }) {
                     </label>
                     {selectedQuestions.includes(question) && (
                       <div className="upload-section">
-                        <button
-                          className="upload-button"
-                          onClick={() => handleUploadClick(question)}
-                        >
-                          Upload Video
-                        </button>
-                        <input
-                          type="file"
-                          id={`video-upload-${question}`}
-                          accept="video/*"
-                          //style={{ display: "none" }}
-                          onChange={(e) => {
-                            setFileToUpload(e.target.files[0]);
-                            setIsConfirmOpen(true);
-                          }}
-                        />
-                        {/* {uploadedVideos[question] && (
-                          <div className="uploaded-info">
-                            <p>{uploadedVideos[question].name}</p>
-                            <button
-                              className="remove-button"
-                              onClick={() => handleRemoveVideo(question)}
-                            >
-                              Remove
-                            </button>
-                          </div>
-                        )} */}
-                      </div>
+                      {isUploading ? (
+                        <div className="loading-spinner">Uploading...</div>
+                      ) : (
+                        <>
+                          <button
+                            className="upload_button"
+                            onClick={() => handleUploadClick(question)}
+                          >
+                            Upload
+                          </button>
+                          <input
+                            type="file"
+                            id={`video-upload-${question}`}
+                            accept="video/*"
+                            style={{ display: "none" }}
+                            onChange={(e) => {
+                              setFileToUpload(e.target.files[0]);
+                              setIsConfirmOpen(true);
+                            }}
+                          />
+                        </>
+                      )}
+                    </div>
+                    
                     )}
                   </div>
                 ))}

@@ -1,6 +1,41 @@
+.app {
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-image: url("bg.jpg"); /* Replace with your image URL */
+  background-size: cover; /* Ensure the image covers the entire background */
+  background-position: center; /* Center the image */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Position for the overlay */
+  overflow: hidden; /* Prevent scrollbars if content overflows */
+  overflow-y: auto;
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Black overlay with 50% transparency */
+  z-index: 0; /* Ensure it stays behind content */
+}
+
+.container,
+.title,
+.form-container {
+  position: relative; /* Stack above the overlay */
+  z-index: 1;
+  color: white; /* Make text visible against the dark overlay */
+}
+
 .title {
   color: #642D9B;
   font-size: 70px;
+  font-weight: bold;
 }
 
 /* Form container to center the buttons */
@@ -100,19 +135,24 @@ body {
 }
 
 .ribbon {
-  position: relative;
+  position: fixed; /* Ensures the ribbon stays at the top */
   top: 0;
-  background-color: #642D9B;
-  color: white;
+  left: 10;
+  width: 100%; /* Spans the full width of the page */
+  background: #642D9B; /* Semi-transparent white background */
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+  z-index: 1000; /* Keeps it above other elements */
 }
 
 .ribbon .logo {
   font-size: 20px;
   font-weight: bold;
   margin-left: 5px;
+  color: #ccc;
 }
 
 .nav-links a {

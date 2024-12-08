@@ -1,3 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Ensure vertical scrolling is enabled */
+}
+
 .container_ {
     max-width: 800px;
     margin: auto;
@@ -10,11 +19,16 @@
     margin-bottom: 20px;
     color: #642D9B;
     text-align: 20px;
+    position: relative; /* Stack above the overlay */
+    z-index: 1;
   }
   
   p {
     font-size: 16px;
     margin-bottom: 30px;
+    position: relative; /* Stack above the overlay */
+    z-index: 1;
+    color: #ccc;
   }
 
   .loading-spinner {
@@ -27,6 +41,8 @@
   
   .categories-container {
     margin-top: 20px;
+    position: relative; /* Stack above the overlay */
+    z-index: 1;
   }
 
   .category-item {
@@ -34,6 +50,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
+    position: relative; /* Stack above the overlay */
+    z-index: 1;
   }
   
   /* Category title styling */
@@ -41,10 +59,12 @@
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-    color: #333;
+    color: white;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    position: relative; /* Stack above the overlay */
+    z-index: 1;
   }
   
   /* Hover effect for categories */
@@ -62,7 +82,7 @@
     margin-left: 8px;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #333; /* Color of the triangle */
+    border-top: 6px solid white; /* Color of the triangle */
     transition: transform 0.3s ease;
   }
   
@@ -92,6 +112,9 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
+    position: relative; /* Stack above the overlay */
+    z-index: 1;
+    color: white;
   }
   
   .upload-section {

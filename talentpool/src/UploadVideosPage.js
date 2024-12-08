@@ -3,44 +3,77 @@ import "./UploadVideos.css";
 
 function UploadVideosPage({ onVideoUpload }) {
   const questionsByCategory = {
-    "General/Personal": [
-      "Tell us about yourself.",
-      "What are your strengths?",
-      "What are your weaknesses?",
-      "Why are you interested in this internship?",
-      "What do you know about our company?",
+    "Personal and Background": [
+      " Can you tell us a little about yourself?",
+      " What made you choose this field of study?",
+      " Why are you interested in pursuing a career in this industry?",
+      " What do you think are your biggest strengths?",
+      " What would you consider your weaknesses, and how are you working to improve them?",
+      " Tell us about a time when you successfully handled a challenge.",
+      " How do you stay organized and manage multiple tasks?",
+      " What are your short-term and long-term career goals?",
+      " How do you prioritize your tasks when you have multiple deadlines?",
+      " What would you consider to be your biggest accomplishment so far?"
     ],
-    "Career Goals": [
-      "What are your goals?",
-      "Where do you see yourself in five years?",
-      "What motivates you?",
+    "Academic and Skills-related": [
+      " How has your academic experience prepared you for this internship/job?",
+      " What specific skills or experiences do you hope to gain during this internship/job?",
+      " Have you worked on any projects during your studies that are relevant to this position?",
+      " What technical skills do you have that would benefit this role?",
+      " Are you familiar with any industry-specific tools or software?",
+      " What courses or subjects did you enjoy the most in your studies? Why?",
+      " Can you describe any research you’ve conducted that is relevant to the work we do?",
+      " How do you ensure the quality and accuracy of your work?",
+      " Do you prefer working with data, or do you enjoy creative tasks more?",
+      " What kind of learning resources do you prefer—books, online tutorials, or hands-on experience?"
     ],
-    "Problem Solving": [
-      "How do you approach learning something new?",
-      "How do you handle pressure?",
-      "Explain a time when you had to make a decision with limited information."
+    "Teamwork and Communication": [
+      " How do you handle working in a team environment?",
+      " Can you describe a time you worked on a team project? What was your role?",
+      " How do you manage conflicts in a group setting?",
+      " What strategies do you use to ensure effective communication with teammates?",
+      " Have you ever had to resolve a disagreement with a peer? How did you handle it?",
+      " What do you think is the most important quality in a team member?",
+      " How do you ensure your ideas are heard in group discussions?",
+      " Have you ever led a team or taken the lead in a project? How did you manage the group?",
+      " How do you motivate yourself and others when facing a difficult task?",
+      " How would you describe your communication style?"
     ],
-    "Achievements": [
-      "What are your proudest achievements?",
-      "What three words best describe you?",
+    "Problem-Solving and Critical Thinking": [
+      " Describe a situation where you had to think outside the box to solve a problem.",
+      " How do you approach learning new things that are outside your comfort zone?",
+      " Tell us about a time you identified an inefficiency or problem in a process and suggested an improvement.",
+      " How would you approach a task you don’t know much about?",
+      " How do you handle making mistakes at work or school?",
+      " What do you do when faced with a task that you are not sure how to complete?",
+      " Give an example of a problem you solved by working with others.",
+      " What is the most difficult decision you’ve had to make recently?",
+      " How do you handle working on multiple projects with competing priorities?",
+      " If you received critical feedback from a manager or team member, how would you respond?"
     ],
-    "Academic/Skills-Based": [
-      "What are your favorite subjects in school?",
-      "What technical skills do you bring to this role?",
-      "Can you explain a complex concept you learned in a simple way?",
+    "Adaptability and Learning": [
+      " How do you handle changes in priorities or unexpected situations?",
+      " Can you describe a situation where you had to adapt to a new system or process?",
+      " What motivates you to learn new things and take on new challenges?",
+      " Tell us about a time when you had to quickly adjust to a new environment or team.",
+      " How do you keep up with the latest trends and developments in your field?",
+      " What new skills are you working on or would like to develop further?",
+      " How do you manage your time when dealing with a steep learning curve?",
+      " What strategies do you use to handle stress and pressure when learning something new?",
+      " What’s the most important lesson you’ve learned during your academic or internship experience?",
+      " Why should we hire you for this internship/entry-level role?"
     ],
-    "Behavioral": [
-      "Give an example of a time when you took the initiative.",
-      "How do you prioritize your tasks when working on multiple projects?",
-      "Tell me about a situation where you had to adapt quickly to changes.",
-    ],
-    "Cultural Fit": [
-      "Describe your ideal relationship with a supervisor.",
-      "How do you contribute to building a collaborative work environment?",
-    ],
-    "Situational": [
-      "If you were given a task with unclear instructions, what would you do?",
-      "What would you do if a teammate was not contributing to a project?",
+    "Behavioral and Situational": [
+      " Can you describe a situation where you had to meet a challenging deadline?",
+      " Tell us about a time when you had to work independently without much guidance.",
+      " What would you do if you were assigned a task that didn’t align with your skills or interests?",
+      " Describe a time when you had to work with someone who was difficult to collaborate with.",
+      " What would you do if you were given feedback that you didn’t agree with?",
+      " Tell us about a time when you felt particularly proud of your contribution to a project.",
+      " Have you ever worked on a project where things didn’t go as planned? How did you handle it?",
+      " Can you describe a situation where you demonstrated leadership skills?",
+      " How would you handle a situation where you need to meet the expectations of multiple supervisors?",
+      " Have you ever been in a situation where you had to learn from your mistakes? How did you improve?"
     ]
   };
 
